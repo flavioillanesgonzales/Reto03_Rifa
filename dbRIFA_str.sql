@@ -3,8 +3,13 @@
 
 -- tables
 -- Table: GANADOR
+CREATE DATABASE dbRIFA
+GO
+USE dbRIFA
+GO
+
 CREATE TABLE GANADOR (
-    CODGAN int  NOT NULL,
+    CODGAN int  identity (1,1) NOT NULL,
     CODRIF char(4)  NOT NULL,
     CODPRE char(1)  NOT NULL,
     CONSTRAINT GANADOR_pk PRIMARY KEY  (CODGAN)
@@ -12,7 +17,7 @@ CREATE TABLE GANADOR (
 
 -- Table: PARTICIPANTE
 CREATE TABLE PARTICIPANTE (
-    CODPAR int  NOT NULL,
+    CODPAR int  identity (1,1) NOT NULL,
     NOMPAR varchar(50)  NOT NULL,
     APEPAR varchar(50)  NOT NULL,
     CELPAR char(9)  NOT NULL,

@@ -58,7 +58,7 @@ public class ParticipanteImpl extends Conexion implements ICRUD<Participante> {
     }
 
     @Override
-    public List<Participante> listarTodos() throws Exception {
+    public List listarTodos() throws Exception {
         List<Participante> listado = null;
         Participante pars;
         String SQL = "SELECT * FROM PARTICIPANTE";

@@ -10,7 +10,7 @@ GO
 
 CREATE TABLE GANADOR (
     IDGAN int  identity (1,1) NOT NULL,
-    CODRIF char(4)  NOT NULL,
+    IDRIF char(4)  NOT NULL,
     CODPRE char(1)  NOT NULL,
     CONSTRAINT GANADOR_pk PRIMARY KEY  (IDGAN)
 );
@@ -35,7 +35,7 @@ CREATE TABLE PREMIO (
 -- Table: RIFA
 CREATE TABLE RIFA (
     IDRIF int indentity(1000,1) NOT NULL,
-    CODPAR int  NOT NULL,
+    IDPAR int  NOT NULL,
     CONSTRAINT RIFA_pk PRIMARY KEY  (IDRIF)
 );
 

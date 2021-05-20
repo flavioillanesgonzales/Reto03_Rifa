@@ -34,7 +34,7 @@ CREATE TABLE PREMIO (
 
 -- Table: RIFA
 CREATE TABLE RIFA (
-    IDRIF int indentity(1000,1) NOT NULL,
+    IDRIF int identity (1000,1) NOT NULL,
     IDPAR int  NOT NULL,
     CONSTRAINT RIFA_pk PRIMARY KEY  (IDRIF)
 );

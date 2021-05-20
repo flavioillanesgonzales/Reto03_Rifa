@@ -1,6 +1,3 @@
--- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-05-16 00:14:32.881
-
 -- tables
 -- Table: GANADOR
 CREATE DATABASE dbRIFA
@@ -54,6 +51,3 @@ ALTER TABLE GANADOR ADD CONSTRAINT GANADOR_RIFA
 ALTER TABLE RIFA ADD CONSTRAINT RIFA_PARTICIPANTE
     FOREIGN KEY (IDPAR)
     REFERENCES PARTICIPANTE (IDPAR);
-
--- End of file.
-

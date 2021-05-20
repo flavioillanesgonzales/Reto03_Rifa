@@ -10,7 +10,7 @@ GO
 
 CREATE TABLE GANADOR (
     IDGAN int  identity (1,1) NOT NULL,
-    IDRIF char(4)  NOT NULL,
+    IDRIF int  NOT NULL,
     CODPRE char(1)  NOT NULL,
     CONSTRAINT GANADOR_pk PRIMARY KEY  (IDGAN)
 );

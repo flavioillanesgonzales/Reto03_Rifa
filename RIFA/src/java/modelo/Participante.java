@@ -9,6 +9,7 @@ public class Participante {
     private String apellido;
     private String celular;
     private String estado;
+    private String cantidad;
 
     public int getIde() {
         return ide;
@@ -48,6 +49,14 @@ public class Participante {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
     }
 
     

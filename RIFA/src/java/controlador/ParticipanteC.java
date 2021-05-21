@@ -20,7 +20,7 @@ public class ParticipanteC implements Serializable {
     Participante parc;
     ParticipanteImpl dao;
     List<Participante> listadopar;
-    RifaImpl rifa;
+    private RifaImpl rifa = new RifaImpl();
 
     public ParticipanteC() {
         parc = new Participante();
@@ -31,8 +31,7 @@ public class ParticipanteC implements Serializable {
     public void registrar() throws Exception {
         try {
             dao.registrar(parc);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK", "Registro Exitoso"));
-            Limpiar();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK", "Registro de rifa y participante exitosa"));
             listar();
         } catch (Exception e) {
             System.out.println("Error en RegistrarC" + e);
@@ -87,35 +86,26 @@ public class ParticipanteC implements Serializable {
         dao.autocompleteCelular(query);
         return dao.autocompleteCelular(query);
     }
-
-    public void rifaparticipante(int codigo) {
-        RifaImpl rif = new RifaImpl();
-        rif.RegistrarRifa(codigo);
-        System.out.println(parc.getIde() + parc.getNombre() + parc.getApellido());
-        System.out.println("COdigo rifaparticipante" + codigo);
-    }
-    public static int codigo;
+    
     public void validar() throws Exception {
-        boolean vali;
         try {
             dao.validarparticipante(parc);
-            vali = dao.validacion;
-            System.out.println("vali = " + vali + dao.validacion);
-            System.out.println(parc.getIde() + parc.getNombre() + parc.getApellido());
-            codigo = parc.getIde();
-            System.out.println("Codigo" + parc.getIde());
-//            rifaparticipante();
-//            if (codigo > 0) {
-//                rifa.RegistrarRifa(codigo);
-//                System.out.println("Estoy en true" +parc.getIde()+ parc.getNombre() + parc.getApellido());
-//            } else {
-//                registrar();
-//            }
-            System.out.println("Estoy en Controlador validar");
-            System.out.println(vali);
-            rifa.codigo = codigo;
-            System.out.println("rifa codigo"+rifa.codigo);
-            rifaparticipante(codigo);
+            int codigo = parc.getIde();
+            String cantidad = parc.getCantidad();
+            System.out.println("Codigo" + parc.getIde() + "Cantidad" + parc.getCantidad());
+            if(codigo > 0){
+                rifa.RegistrarRifa(codigo,cantidad);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Registro de rifa exitosa"));
+            }
+            else if(codigo == 0){
+                System.out.println ("Estoy aca en else " + parc.getIde() + parc.getNombre() + parc.getApellido() + parc.getCantidad());
+                registrar();
+                dao.obtenerId(parc);
+                codigo = parc.getIde();
+                cantidad = parc.getCantidad();
+                rifa.RegistrarRifa(codigo,cantidad);
+                System.out.println("Este es el id " + parc.getIde());
+            }
             Limpiar();
             listar();
          }catch (Exception e) {
@@ -150,6 +140,14 @@ public class ParticipanteC implements Serializable {
 
     public void setListadopar(List<Participante> listadopar) {
         this.listadopar = listadopar;
+    }
+
+    public RifaImpl getRifa() {
+        return rifa;
+    }
+
+    public void setRifa(RifaImpl rifa) {
+        this.rifa = rifa;
     }
 
 }

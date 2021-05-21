@@ -6,117 +6,99 @@
       xmlns:fn="http://java.sun.com/jsp/jstl/functions">
     <h:head>
         <title>Listado de Participantes</title>
-
     </h:head>
     <f:event id="Mensajes" listener="#{participanteC.listar()}" type="preRenderView" />
     <h:form>
     <p:menubar>
-        <p:menuitem value="Juego" outcome="IXRifa" />
-        <p:menuitem value="Participantes" outcome="IXParticipante"/>
+        
+        <p:menuitem  style="color: white"  value="JUEGO" outcome="IXRifa" />
+        <p:menuitem style="color: white" value="PARTICIPANTES" outcome="IXParticipante"/>
     </p:menubar>
     </h:form>
     
     <h:body>      
         <style>
-            body {background-color: #cde6ff;}
+            body {background-image:url(images/fondo.jpg)}
         </style>
         <p:growl id="mensaje" showDetail="true" />
         <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
-
+        
         <h:form id="form">            
 
             <!--                    Formulario del Personero    >         -->
-            <p:panelGrid columns="2"  style="width: 30%;">
-                <p:outputLabel for="Nombre" value="Nombre" />
+            <p:panelGrid columns="2"  style="width: 38%;">
+                <p:outputLabel  style="color: white" for="Nombre" value="Nombre:" />
                 <p:autoComplete id="Nombre" value="#{participanteC.parc.nombre}" maxlength="50" 
                                 completeMethod="#{participanteC.completeTextNombre(participanteC.parc.nombre)}">
-                    <p:keyFilter for="Nombre" regEx="/[A-z,' ']/" />                    
+                    <p:keyFilter regEx="/[A-z,' ']/" />                    
                     <p:ajax update="Nombre" event="keyup" />
                 </p:autoComplete>     
                 
-                <p:outputLabel value="Apellido" /> 
+                <p:outputLabel style="color: white" value="Apellido:" /> 
                 <p:autoComplete id="Apellido" value="#{participanteC.parc.apellido}" maxlength="50"  completeMethod="#{participanteC.completeTextApellido(participanteC.parc.apellido)}">
                     <p:ajax update="Apellido" event="keyup" />
                 </p:autoComplete>
                 
                 
-                <p:outputLabel value="Celular" /> 
+                <p:outputLabel class="p-text-bold"  style="color: white" value="Celular:" /> 
                 <p:autoComplete id="Celular" value="#{participanteC.parc.celular}" completeMethod="#{participanteC.completeTextCelular(participanteC.parc.celular)}"  maxlength="9" >
                     <p:keyFilter regEx="/[0-9]/" />
                     <p:ajax update="Celular" event="keyup" />
                 </p:autoComplete>
                 
-                <p:outputLabel value="Cantidad de Rifas" /> 
-                <p:spinner style="width: 30%;" value="#{participanteC.parc.cantidad}"  maxlength="2" min="1" max="20">
+                <p:outputLabel  style="color: white" value="Cantidad de Rifas:" /> 
+                <p:spinner value="#{participanteC.parc.cantidad}" maxlength="2" >
                     <p:keyFilter regEx="/[0-9]/" />
                 </p:spinner>
                 
                 
+                
+                <p:commandButton  style="color: yellow" value="Registrar"  actionListener="#{participanteC.validar()}" update="tablaPar mensaje"/>
 
-                <p:commandButton value="Registrar"  actionListener="#{participanteC.validar()}"   update="tablaPar mensaje"/>
-<!--                <p:commandButton oncomplete="PF('wdlgResultado').show();" >
-                    <f:setPropertyActionListener value="#{tblpar}"  target="#{participanteC.parc}" />
-                    <p:ajax update="detalle" > </p:ajax>
-                </p:commandButton>-->
-                
-<!--                <h:form id="detalle">
-                    <p:dialog header="Participante:" widgetVar="wdlgResultado" id="dlgDatos" resizable="false">
-                   <p:panelGrid id="resultado" columns="2"  style="width: 30%;" >
-                    <p:outputLabel for="Nombre" value="Nombre" />
-                    <p:outputLabel id="Nombre" value="#{participanteC.parc.nombre}" />
-                    
-                    <p:outputLabel for="Apellido" value="Apellido" />
-                    <p:outputLabel id="Apellido" value="#{participanteC.parc.apellido}" />
-                    
-                    <p:outputLabel for="Celular" value="Celular" />
-                    <p:outputLabel id="Celular" value="#{participanteC.parc.celular}" />
-                    
-                    </p:panelGrid> 
-                    </p:dialog>
-                
-                </h:form>-->
                 
                 
             </p:panelGrid>
             <!--  Listado del Participante -->
             <p:dataTable  var="tblpar" id="tablaPar" value="#{participanteC.listadopar}" rows="7" 
-                          rowKey="#{participanteC.parc.ide}" selection="#{participanteC.listadopar}"
-                         
+                         rowKey="#{participanteC.parc.ide}"
                          paginator="true"
                          currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                          rowsPerPageTemplate="5,10,{ShowAll|'All'}" >
-                <p:column headerText="ID" style="width: 80px; alignment-adjust: central;column-rule-color: royalblue   ">
-                    <h:outputText style="object-position: center" value="#{tblpar.ide}"  />
+                <p:column  headerText="ID" style="width: 80px; alignment-adjust: central;column-rule-color: royalblue; color: yellow;   ">
+                    <h:outputText value="#{tblpar.ide}"  />
                 </p:column>
                 
-                <p:column headerText="Nombre">
+                <p:column style="color: yellow" headerText="Nombre">
                     <h:outputText value="#{tblpar.nombre}" />
                 </p:column>
 
-                <p:column headerText="Apellido">
+                <p:column style="color: yellow" headerText="Apellido">
                     <h:outputText value="#{tblpar.apellido}" />
                 </p:column>
 
-                <p:column headerText="Celular">
+                <p:column style="color: yellow" headerText="Celular">
                     <h:outputText value="#{tblpar.celular}" />
                 </p:column>
                 
                 
-<!--                <p:contextMenu>
-                    <p:menuitem oncomplete="PF('wdlgDatos').show();" value="Modificar"  action="#{participanteC.modificar()}" update="datos" >
-                        <f:setPropertyActionListener value="#{tblpar}"  target="#{participanteC.parc}" />
 
-                    </p:menuitem>
+                <p:column headerText="Modificar">
+                    <p:commandButton oncomplete="PF('wdlgDatos').show();" value="Modificar" update="datos" action="#{participanteC.modificar()}" >
+                        <f:setPropertyActionListener value="#{tblparr}"  target="#{participanteC.parc}" />
+                    </p:commandButton>
+                </p:column> 
 
 
-                    <p:menuitem value="Eliminar" icon="ui_icon_trash" actionListener="#{participanteC.Eliminar(tblspars)}" update="tablaPar mensaje">
+                <p:column headerText="Eliminar">
+                    <p:commandButton value="Eliminar" icon="ui_icon_trash" actionListener="#{participanteC.Eliminar(tblspars)}" update="tablaPar mensaje">
                         <p:confirm header="Confirmación" message="¿Deseas eliminar?" icon="ui_icon_trash"/>
-                    </p:menuitem>
+                    </p:commandButton>
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                         <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
                         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
                     </p:confirmDialog> 
-                </p:contextMenu>-->
+                </p:column>
+
                 <f:facet name="footer">
                     EN TOTAL HAY #{fn:length(participanteC.listadopar)} REGISTROS.
                 </f:facet>
@@ -131,12 +113,12 @@
                 <p:ajax event="close"  update="datos"/>
                 <p:panelGrid columns="2">
                     <p:outputLabel for="Nombre" value="Nombre" />
-                    <p:inputText id="Nombre" value="#{participanteC.parc.nombre}" maxlength="50" required="true">
+                    <p:inputText  id="Nombre" value="#{participanteC.parc.nombre}" maxlength="50" required="true" />
                         <p:keyFilter regEx="/[A-z,' ']/" />                    
                         <!--                    <p:ajax update="msgDni" event="keyup" />-->
-                    </p:inputText>                               
+                                                 
                     <p:outputLabel value="Apellido" /> 
-                    <p:inputText value="#{participanteC.parc.apellido}" maxlength="50" />
+                    <p:inputText style="background-color:lightblue" value="#{participanteC.parc.apellido}" maxlength="50" />
 
                     <p:outputLabel value="Celular" /> 
                     <p:inputText value="#{participanteC.parc.celular}" maxlength="9" >

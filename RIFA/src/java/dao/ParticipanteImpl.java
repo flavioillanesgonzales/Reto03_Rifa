@@ -126,9 +126,6 @@ public class ParticipanteImpl extends Conexion implements ICRUD<Participante> {
             while (rs.next()) {
                 lista.add(rs.getString("CELULARES"));
             }
-            System.out.println("Estoy en impl Celular");
-            System.out.println("Consulta" + consulta);
-            System.out.println("Lista" + lista);
         } catch (Exception e) {
             System.out.println("Error en autocompleteCelular" + e.getMessage());
         }
@@ -139,27 +136,41 @@ public class ParticipanteImpl extends Conexion implements ICRUD<Participante> {
     public void validarparticipante(Participante pars) throws Exception {
         String nombre = pars.getNombre();
         String apellido = pars.getApellido();
-        String celular = pars.getCelular();
-//        String SQL = "SELECT IDPAR FROM PARTICIPANTE WHERE NOMPAR='?'" + " and APEPAR='?'"+ "and CELPAR='?'";
+        String celular = pars.getCelular();        
         String SQL = "SELECT IDPAR FROM PARTICIPANTE WHERE NOMPAR='" + nombre + "' and APEPAR='" + apellido + "' and CELPAR='" + celular + "'";
         System.out.println("codigo" + pars.getIde());
         try {
             Statement st = this.conectar().createStatement();
             ResultSet rs = st.executeQuery(SQL);
-//            par.setIde(rs.getInt("IDPAR"));
-//            pars.setIde(Integer.parseInt(rs.getString("IDPAR")));
-            pars.setIde(Integer.parseInt("2"));
-            System.out.println("codigo" + pars.getIde());
-//            ps.setString(1, par.getNombre());
-//            ps.setString(2, par.getApellido());
-//            ps.setString(3, par.getCelular());
-            System.out.println("Nombre" + pars.getNombre() + "Apellido" + pars.getApellido() + "Celular" + pars.getCelular());
+            rs.next();
+            pars.setIde(rs.getInt("IDPAR"));   
             rs.close();
             st.close();
-            int val = pars.getIde();
-            System.out.println("Val = " + val);
         } catch (Exception e) {
             System.out.println("Error en validar participante" + e.getMessage());
         }
     }
+    
+    public void obtenerId(Participante pars)throws Exception{
+        String nombre = pars.getNombre();
+        String apellido = pars.getApellido();
+        String celular = pars.getCelular();        
+        String SQL = "SELECT IDPAR FROM PARTICIPANTE WHERE NOMPAR='" + nombre + "' and APEPAR='" + apellido + "' and CELPAR='" + celular + "'";
+        System.out.println("Estoy en obtener ID" + SQL);
+        try {
+            Statement st = this.conectar().createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+            rs.next();
+            pars.setIde(rs.getInt("IDPAR"));   
+            System.out.println("codigo" + pars.getIde());
+            System.out.println("Nombre" + pars.getNombre() + "Apellido" + pars.getApellido() + "Celular" + pars.getCelular());
+            rs.close();
+            st.close();
+        } catch (Exception e) {
+            System.out.println("Error en validar participante" + e.getMessage());
+        }
+        
+    }
+    
+    
 }

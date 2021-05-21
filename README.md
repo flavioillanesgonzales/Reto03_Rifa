@@ -8,5 +8,3 @@
 - Cambio de tema PRIMEFACES: https://www.youtube.com/watch?v=dl4i8tJ47DM
 - Inner Joins: https://www.youtube.com/watch?v=V3TwO7wP8u4
 - Implementacion de Galleria(ShowCase): https://www.youtube.com/watch?v=fTjHL4OCMGI&t=760s
-- Link Carpeta Drive (Imagenes,JAR,etc): https://drive.google.com/drive/folders/1eXnsyMJSutHKYWycPd8L-T-r8nXuEvpt?usp=sharing
-
